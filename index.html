@@ -29,8 +29,10 @@
                     <ul>
                         <li v-for="detail in details">{{ detail }}</li>
                     </ul>
+                    <p1 v-if="inStock != true" :class="setPic">
                     <div v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)" class="color-circle" :style="{ background: variant.color }"></div>
-                    <button class=" button " :disabled='!inStock'  :class=" { disabledButton: !inStock } " :class="changeText" @click="addToCart">Add To Cart</button>
+                    </p1>
+                    <button class=" button " :disabled='!inStock'  :class=" { disabledButton: !inStock } " @click="addToCart">Add To Cart</button>
         </div>
     </div>
 

@@ -22,7 +22,7 @@ const app = Vue.createApp({
         updateImage(variantImage) {
             this.image = variantImage
         },
-        changeText(){
+        setPic(){
             if(inStock==true){
                 text = 'Add to Cart'
             }
