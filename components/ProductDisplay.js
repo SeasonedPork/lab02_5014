@@ -29,8 +29,10 @@ app.component('product-display',{
 			</div>
 		</div>
 	</div>`,
+
 	data(){
-		return{
+		return {
+			image:'./assets/images/socks_green.jpg',
 			product: 'Shoes',
 			Brand: 'SE 331',
 			inventory: 100,
@@ -39,7 +41,7 @@ app.component('product-display',{
                 		{ id: 2234, color: 'green', image: './assets/images/socks_green.jpg',quantity: 50 },
                 		{ id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg' ,quantity: 0},
             		],
-			//seem cart  get mention in main.js
+			//seem cart get mention in main.js
 			activeClass: true,
 			selectedVariant:0
 		}
