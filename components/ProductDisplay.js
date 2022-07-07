@@ -1,4 +1,12 @@
 app.component('product-display',{
+
+	props:{
+		premium:{
+			type: Boolean,
+			required: true
+		}
+	},
+
 	template:
 	/*html*/
 	`<div class="product-display">
@@ -11,13 +19,14 @@ app.component('product-display',{
 
 				<p v-if="inStock" > In Stock </p>
 				<p v-else> Out of Stock </p>
+				<p >Shipping:{{shipping}} </p>
 
 				<div
 					v-for="(variant, index) in variants"
 					:key="variant.id"
 					@mouseover="updateVariant(index)"
 					class="color-circle"
-					:style="{ background-color: variant.color}">
+					:style="{ backgroundColor: variant.color}">
 				</div>
 				
 				<button
@@ -25,35 +34,46 @@ app.component('product-display',{
 					:class="{ disabledButton: !inStock }"
 					:disabled="!inStock"
 					v-on:click="addToCart">
+					Add to Cart
 				</button>
+
+				<product-detail :details="details"></product-detail>
+
 			</div>
 		</div>
-	</div>`,
+	</div>
+	
 
-	data(){
+
+	
+	`,
+
+	data() {
 		return {
-			image:'./assets/images/socks_green.jpg',
-			product: 'Shoes',
-			Brand: 'SE 331',
-			inventory: 100,
-			details: ['50% cotton', '30% wool', '20% polyester'],
-            		variants: [
-                		{ id: 2234, color: 'green', image: './assets/images/socks_green.jpg',quantity: 50 },
-                		{ id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg' ,quantity: 0},
-            		],
-			//seem cart get mention in main.js
-			activeClass: true,
-			selectedVariant:0
+		    text: 'something',
+		    product: 'Shoes',
+		    brand:'SE 331',
+		    onsale:true,
+		    image: './assets/images/socks_green.jpg',
+		    inStock: true,
+		    inventory: 100,
+		    details: ['50% cotton', '30% wool', '20% polyester'],
+		    variants: [
+			{ id: 2234, color: 'green', image: './assets/images/socks_green.jpg',quantity: 50 },
+			{ id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg' ,quantity: 0},
+		    ],
+		    cart: 0
+	
 		}
-	},
-	methods: {
+	    },
+	    methods: {
 		addToCart() {
 		    this.cart += 1
 		},
 		updateImage(variantImage) {
 		    this.image = variantImage
 		},
-		upateVariant(index){
+		updateVariant(index){
 		    this.selectedVariant = index;
 		}
 	    },
@@ -70,6 +90,12 @@ app.component('product-display',{
 		},
 		inStock(){
 		    return this.variants[this.selectedVariant].quantity
+		},
+		shipping(){
+			if(this.premium){
+				return 'Free'
+			}
+			return 30
 		}
 	}
 })
