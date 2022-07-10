@@ -8,18 +8,22 @@ const app = Vue.createApp({
             inventory: 100,
             details: ['50% cotton', '30% wool', '20% polyester'],
             variants: [
-                { id: 2234, color: 'green', image: './assets/images/socks_green.jpg',quantity: 50 },
+                { id: 2234, color: 'green', image: './assets/images/socks_green.jpg',quantity: 50},
                 { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg' ,quantity: 0},
             ],
             cart: [],
-            premium: true
+            premium: true,
+            counts:0
 
         }
     },
 
     methods: {
-        updateCart(id){
-            this.cart.push(id);
+        updateCart(color){
+            const count = {};
+            this.cart.push(color);
+            this.cart.forEach(function (x) { count[x] = (count[x] || 0) + 1; });
+            this.counts = count;
         },
         addToCart() {
             this.cart += 1
@@ -29,7 +33,13 @@ const app = Vue.createApp({
         },
         updateVariant(index){
             this.selectedVariant = index;
-        }
+        },
+        cleanCart(){
+            this.cart.splice(-1,1);
+            const count = {};
+            this.cart.forEach(function (x) { count[x] = (count[x] || 0) + 1; });
+            this.counts = count;
+		},
     },
 
     computed: {

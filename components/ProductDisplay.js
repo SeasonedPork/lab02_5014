@@ -31,10 +31,10 @@ app.component('product-display',{
 					class="button"
 					:class="{ disabledButton: !inStock }"
 					:disabled="!inStock"
-					v-on:click="addToCart"
-					v-on:click="updateCart">
+					v-on:click="addToCart">
 					Add to Cart
 				</button>
+
 				<button 
 				class="button"
 				v-on:click="cleanCart">
@@ -73,17 +73,7 @@ app.component('product-display',{
 	    },
 	    methods: {
 		addToCart() {
-			console.log('add to cart executing')
-
-			if(this.cart==0){
-			console.log('add to cart doing')
-
-		    	this.$emit('add-to-cart',this.variants[this.selectedVariant].id);
-		    	this.variants[this.selectedVariant].total += 1 ;
-		    	console.log(this.variants[this.selectedVariant].total);
-			
-			}
-			console.log('add to cart done')
+		    	this.$emit('add-to-cart',this.variants[this.selectedVariant].color);
 		},
 
 		// updateCart(color) {
@@ -96,7 +86,7 @@ app.component('product-display',{
 		//     },
 
 		cleanCart(){
-			this.$emit(this.variants.id = [])
+			this.$emit('clean-Cart');
 		},
 		updateImage(variantImage) {
 		    this.image = variantImage
