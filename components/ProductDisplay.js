@@ -47,6 +47,8 @@ app.component('product-display',{
 
 			</div>
 		</div>
+		<review-list v-if="reviews.length" :reviews="reviews"></review-list>
+		<review-form @review-submitted="addReview"></review-form>
 	</div>
 	
 
@@ -67,6 +69,7 @@ app.component('product-display',{
 			{ id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg' ,quantity: 50,total:0},
 		    ],
 		    selectedVariant: 0 ,
+		    reviews:[],
 		    cart: 0
 	
 		}
@@ -95,6 +98,9 @@ app.component('product-display',{
 		updateVariant(index){
 		    this.selectedVariant = index;
 		    console.log('i like balls');
+		},
+		addReview(review){
+			this.reviews.push(review)
 		}
 	    },
 	
